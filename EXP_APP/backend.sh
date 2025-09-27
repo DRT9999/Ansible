@@ -59,7 +59,7 @@ dnf install mysql-server -y &>> $LOG
 stat $?
 
 COLOR Injecting Scheme To MySQL DB
-mysql -h 44.223.18.68 -uroot -p$ROOTPASS < /app/schema/backend.sql  &>> $LOG
+mysql -h mysqlip -uroot -p$ROOTPASS < /app/schema/backend.sql  &>> $LOG
 stat $? 
 
 COLOR Starting $COMPONENT  
