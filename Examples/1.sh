@@ -2,6 +2,6 @@
 
 pwd
 
-source stat
+source stat.sh
 
 stat $?
