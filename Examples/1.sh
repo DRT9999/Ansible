@@ -9,6 +9,6 @@ stat() {
     fi 
 }
 
-ls
+lo
 
 stat $?
