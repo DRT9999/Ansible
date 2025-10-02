@@ -13,5 +13,5 @@
 - name: Restart {{COMP}}
   ansible.builtin.systemd:
     name: mysqld
-    state: restart
+    state: restarted
     enabled: yes
