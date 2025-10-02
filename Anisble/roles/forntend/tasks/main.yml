@@ -43,5 +43,3 @@
     name: nginx
     state: restarted
     enabled: yes   # Enable to start at boot
-
-
