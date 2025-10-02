@@ -21,6 +21,27 @@
   ansible.builtin.copy:
     src: proxy.conf
     dest: /etc/nginx/default.d/expense.conf
-    
+
+- name: Delete a file
+  ansible.builtin.file:
+    path: /usr/share/nginx/html/*
+    state: absent
+
+- name: Create a directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: directory
+
+- name: Dowloading file to remote server
+  ansible.builtin.unarchive:
+    src: https://expense-web-app.s3.amazonaws.com/frontend.zip      # Local path (control node)
+    dest: /usr/share/nginx/html              # Remote directory
+    remote_src: yes                 # File is copied to remote before extracting
+
+- name: ReStart nginx service
+  ansible.builtin.systemd_service:
+    name: nginx
+    state: restarted
+    enabled: yes   # Enable to start at boot
 
 
