@@ -39,7 +39,7 @@
     remote_src: yes                 # File is copied to remote before extracting
 
 - name: ReStart nginx service
-  ansible.builtin.systemd
+  ansible.builtin.systemd:
     name: nginx
     state: restarted
     enabled: yes   # Enable to start at boot
