@@ -17,7 +17,7 @@
     name: nginx
     state: present
 
-- name: Copy SSH public key
+- name: Copy file
   ansible.builtin.copy:
     src: proxy.conf
     dest: /etc/nginx/default.d/expense.conf
