@@ -24,18 +24,18 @@
 
 - name: Delete a file
   ansible.builtin.file:
-    path: /usr/share/nginx/html/*
+    path: "{{APP_PATH}}"
     state: absent
 
 - name: Create a directory
   ansible.builtin.file:
-    path: /usr/share/nginx/html
+    path: "{{APP_PATH}}"
     state: directory
 
 - name: Dowloading file to remote server
   ansible.builtin.unarchive:
-    src: https://expense-web-app.s3.amazonaws.com/frontend.zip      # Local path (control node)
-    dest: /usr/share/nginx/html              # Remote directory
+    src: https://expense-web-app.s3.amazonaws.com/{{COMP}}.zip      # Local path (control node)
+    dest: "{{APP_PATH}}"              # Remote directory
     remote_src: yes                 # File is copied to remote before extracting
 
 - name: ReStart nginx service
