@@ -1,13 +1,26 @@
-#/cdnf install nginx -y  
-cp proxy.conf /etc/nginx/default.d/expense.conf 
-systemctl enable nginx    
-rm -rf /usr/share/nginx/html/*   
-curl -o /tmp/frontend.zip https://expense-web-app.s3.amazonaws.com/frontend.zip
-cd /usr/share/nginx/html 
-unzip /tmp/frontend.zip
-pwd
-ls -ltr
+#dnf install nginx -y  
+#cp proxy.conf /etc/nginx/default.d/expense.conf 
+#systemctl enable nginx    
+#rm -rf /usr/share/nginx/html/*   
+#curl -o /tmp/frontend.zip https://expense-web-app.s3.amazonaws.com/frontend.zip
+#cd /usr/share/nginx/html 
+#unzip /tmp/frontend.zip
+#pwd
+#ls -ltr
 
-systemctl restart nginx 
+#ystemctl restart nginx 
 
-#/echo "** Frontend Installation Is Completed **"
+#echo "** Frontend Installation Is Completed **"
+
+- name: Install a package
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+- name: Copy SSH public key
+  ansible.builtin.copy:
+    src: proxy.conf
+    dest: /etc/nginx/default.d/expense.conf
+    
+
+
