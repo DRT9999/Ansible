@@ -10,6 +10,7 @@
     name: mysql-server
     state: present
 
+
 - name: Restart {{COMP}}
   ansible.builtin.systemd:
     name: mysqld
