@@ -11,7 +11,9 @@
 #ystemctl restart nginx 
 
 #echo "** Frontend Installation Is Completed **"
-
+- name: Set Hostname to {{COMP}}
+  ansible.builtin.shell: set-hostname {{COMP}}
+  
 - name: Install a package
   ansible.builtin.package:
     name: nginx
