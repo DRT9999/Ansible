@@ -70,6 +70,11 @@
     login_password: ExpenseApp@1
     login_host: mysql.exp.in
 
+- name: Copy file
+  ansible.builtin.copy:
+    src: backend.service
+    dest: /etc/systemd/system/backend.service
+
 - name: ReStart nginx service
   ansible.builtin.systemd:
     name: backend
