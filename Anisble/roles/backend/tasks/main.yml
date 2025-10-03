@@ -1,0 +1,59 @@
+# dnf module disable nodejs -y
+# dnf module enable nodejs:20 -y 
+# dnf install nodejs -y 
+# useradd expense
+# mkdir /app 
+# curl -o /tmp/backend.zip https://expense-web-app.s3.amazonaws.com/backend.zip 
+# cp backend.service /etc/systemd/system/backend.service
+# cd /app 
+# unzip -o /tmp/backend.zip
+# cd /app 
+# npm install 
+# chmod -R 775 /app
+# chown -R expense:expense /app
+# dnf install mysql-server -y
+# mysql -h 172.31.33.204 -uroot -pExpenseApp@1 < /app/schema/backend.sql
+# systemctl daemon-reload
+# systemctl enable backend 
+# systemctl start backend 
+
+- name: Set Hostname to {{COMP}}
+  ansible.builtin.shell: set-hostname {{COMP}}
+
+- name: Disable of nodejs
+  ansible.builtin.shell: dnf module disable nodejs -y
+
+- name: Enabling of nodejs:20
+  ansible.builtin.shell: dnf module enable nodejs:20 -y
+
+- name: Install a package
+  ansible.builtin.dnf:
+    name: nodejs
+    state: present
+
+- name: Copy file
+  ansible.builtin.copy:
+    src: proxy.conf
+    dest: /etc/nginx/default.d/expense.conf
+
+- name: Delete a file
+  ansible.builtin.file:
+    path: "{{APP_PATH}}"
+    state: absent
+
+- name: Create a directory
+  ansible.builtin.file:
+    path: "{{APP_PATH}}"
+    state: directory
+
+- name: Dowloading file to remote server
+  ansible.builtin.unarchive:
+    src: https://expense-web-app.s3.amazonaws.com/{{COMP}}.zip      # Local path (control node)
+    dest: "{{APP_PATH}}"              # Remote directory
+    remote_src: yes                 # File is copied to remote before extracting
+
+- name: ReStart nginx service
+  ansible.builtin.systemd:
+    name: nginx
+    state: restarted
+    enabled: yes   # Enable to start at boot
