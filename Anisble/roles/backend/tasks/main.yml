@@ -61,27 +61,17 @@
     name: mysql-server
     state: present
 
-- name: Ensure required system packages are installed
-  ansible.builtin.package:
-    name:
-      - python3
-      - python3-pip
-      - mysql
-    state: present
-
-- name: Install PyMySQL
-  pip:
-    name: PyMySQL
-    executable: pip3
-
-- name: Inject schema
-  community.mysql.mysql_db:
-    state: import
-    name: all
-    target: /app/schema/backend.sql
-    login_user: root
-    login_password: ExpenseApp@1
-    login_host: mysql.exp.in
+- name: Inject schema using mysql CLI directly
+  ansible.builtin.shell: mysql -h mysql.exp.in -uroot -pExpenseApp@1 < /app/schema/backend.sql
+  
+# - name: Inject schema
+#   community.mysql.mysql_db:
+#     state: import
+#     name: all
+#     target: /app/schema/backend.sql
+#     login_user: root
+#     login_password: ExpenseApp@1
+#     login_host: mysql.exp.in
 
 - name: Copy file
   ansible.builtin.copy:
