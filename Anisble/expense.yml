@@ -1,7 +1,7 @@
 - name: Configuging Expense App
   become: true
-  hosts: forntend
+  hosts: frontend
   roles:
-    - role: forntend
+    - role: frontend
 
  
