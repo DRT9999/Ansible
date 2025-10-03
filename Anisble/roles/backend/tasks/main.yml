@@ -36,31 +36,43 @@
     name: expense
     comment: App user
 
-- name: Create a directory
-  ansible.builtin.file:
-    path: "{{APP_PATH}}"
-    state: directory
-
-- name: Copy file
-  ansible.builtin.copy:
-    src: proxy.conf
-    dest: /etc/nginx/default.d/expense.conf
-
 - name: Delete a file
   ansible.builtin.file:
     path: "{{APP_PATH}}"
     state: absent
 
-
+- name: Create a directory
+  ansible.builtin.file:
+    path: "{{APP_PATH}}"
+    state: directory
 
 - name: Dowloading file to remote server
   ansible.builtin.unarchive:
-    src: https://expense-web-app.s3.amazonaws.com/{{COMP}}.zip      # Local path (control node)
+    src: https://expense-web-app.s3.amazonaws.com/backend.zip 
     dest: "{{APP_PATH}}"              # Remote directory
     remote_src: yes                 # File is copied to remote before extracting
 
+- name: Install node.js package.
+  community.general.npm:
+    path: "{{APP_PATH}}"
+
+- name: Install MySQL Server
+  ansible.builtin.package:
+    name: mysql-server
+    state: present
+
+- name: Inject schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    encoding: latin1
+    target: /app/schema/backend.sql
+    login_user: root
+    login_password: ExpenseApp@1
+    login_host: mysql.exp.in
+
 - name: ReStart nginx service
   ansible.builtin.systemd:
-    name: nginx
+    name: backend
     state: restarted
     enabled: yes   # Enable to start at boot
