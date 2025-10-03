@@ -65,7 +65,6 @@
   community.mysql.mysql_db:
     state: import
     name: all
-    encoding: latin1
     target: /app/schema/backend.sql
     login_user: root
     login_password: ExpenseApp@1
