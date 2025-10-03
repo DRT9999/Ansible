@@ -1,5 +1,5 @@
 [frontend]
-172.31.19.221
+frontend.exp.in
 
 [mysql]
 mysql.exp.in
