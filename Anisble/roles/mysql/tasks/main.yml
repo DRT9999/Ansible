@@ -5,7 +5,7 @@
 # echo "** Mysql Installation Completed **"
 
 - name: Set Hostname to {{COMP}}
-  ansible.builtin.shell: sudo set-hostname {{COMP}}
+  ansible.builtin.shell: set-hostname {{COMP}}
 
 - name: Install MySQL Server
   ansible.builtin.package:
