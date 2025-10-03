@@ -31,6 +31,16 @@
     name: nodejs
     state: present
 
+- name: Add the user 
+  ansible.builtin.user:
+    name: expense
+    comment: App user
+
+- name: Create a directory
+  ansible.builtin.file:
+    path: "{{APP_PATH}}"
+    state: directory
+
 - name: Copy file
   ansible.builtin.copy:
     src: proxy.conf
@@ -41,10 +51,7 @@
     path: "{{APP_PATH}}"
     state: absent
 
-- name: Create a directory
-  ansible.builtin.file:
-    path: "{{APP_PATH}}"
-    state: directory
+
 
 - name: Dowloading file to remote server
   ansible.builtin.unarchive:

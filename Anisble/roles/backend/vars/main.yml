@@ -1,2 +1,2 @@
-#APP_PATH: 
+APP_PATH: "/app"
 COMP: "backend"
