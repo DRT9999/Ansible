@@ -25,12 +25,12 @@
     dest: /etc/nginx/default.d/expense.conf
 
 - name: Delete a file
-  ansible.builtin.templates:
+  ansible.builtin.file:
     path: "{{APP_PATH}}"
     state: absent
 
 - name: Create a directory
-  ansible.builtin.file:
+  ansible.builtin.template:
     path: "{{APP_PATH}}"
     state: directory
 
