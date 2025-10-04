@@ -17,8 +17,8 @@
 # systemctl enable backend 
 # systemctl start backend 
 
-- name: Set Hostname to {{COMP}}
-  ansible.builtin.shell: set-hostname {{COMP}}
+- name: Set Hostname to {{COMP}}-{{env}}
+  ansible.builtin.shell: set-hostname {{COMP}}-{{env}}
 
 - name: Disable of nodejs
   ansible.builtin.shell: dnf module disable nodejs -y
@@ -74,7 +74,7 @@
 #     login_host: mysql.exp.in
 
 - name: Copy file
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: backend.service
     dest: /etc/systemd/system/backend.service
 
