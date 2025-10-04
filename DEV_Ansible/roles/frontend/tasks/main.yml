@@ -11,8 +11,8 @@
 #ystemctl restart nginx 
 
 #echo "** Frontend Installation Is Completed **"
-- name: Set Hostname to {{COMP}}
-  ansible.builtin.shell: set-hostname {{COMP}}
+- name: Set Hostname to {{COMP}}-{{env}}
+  ansible.builtin.shell: set-hostname {{COMP}}-{{env}}
 
 - name: Install a package
   ansible.builtin.package:
@@ -20,7 +20,7 @@
     state: present
 
 - name: Copy file
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: proxy.conf
     dest: /etc/nginx/default.d/expense.conf
 
