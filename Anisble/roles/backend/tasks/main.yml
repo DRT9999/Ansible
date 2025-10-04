@@ -62,7 +62,7 @@
     state: present
 
 - name: Inject schema using mysql CLI directly
-  ansible.builtin.shell: mysql -h mysql.exp.in -uroot -pExpenseApp@1 < /app/schema/backend.sql
+  ansible.builtin.shell: mysql -h mysql-{{env}}.exp.in -uroot -pExpenseApp@1 < /app/schema/backend.sql
   
 # - name: Inject schema
 #   community.mysql.mysql_db:
