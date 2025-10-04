@@ -31,7 +31,7 @@
     name: nodejs
     state: present
 
-- name: Add the user  
+- name: Add the user {{COMP}}-{{env}}
   ansible.builtin.user:
     name: expense
     comment: App user
@@ -62,7 +62,7 @@
     state: present
 
 - name: Inject schema using mysql CLI directly
-  ansible.builtin.shell: mysql -h mysql-"{{env}}".exp.in -uroot -pExpenseApp@1 < /app/schema/backend.sql
+  ansible.builtin.shell: mysql -h mysql-{{env}}.exp.in -uroot -pExpenseApp@1 < /app/schema/backend.sql
   
 # - name: Inject schema
 #   community.mysql.mysql_db:
@@ -74,7 +74,7 @@
 #     login_host: mysql.exp.in
 
 - name: Copy file
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: backend.service
     dest: /etc/systemd/system/backend.service
 
