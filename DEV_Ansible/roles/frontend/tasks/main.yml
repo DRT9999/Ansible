@@ -26,7 +26,7 @@
 
 - name: Include backend role with vars
   ansible.builtin.include_role:
-    name: comman
+    name: common
     tasks_from: pre               # File is copied to remote before extracting
 
 - name: ReStart nginx service

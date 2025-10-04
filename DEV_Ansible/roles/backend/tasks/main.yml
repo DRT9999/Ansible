@@ -38,7 +38,7 @@
 
 - name: Include backend role with vars
   ansible.builtin.include_role:
-    name: comman
+    name: common
     tasks_from: pre
 
 - name: Install node.js package.
