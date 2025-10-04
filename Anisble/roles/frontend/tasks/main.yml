@@ -20,12 +20,12 @@
     state: present
 
 - name: Copy file
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: proxy.conf
     dest: /etc/nginx/default.d/expense.conf
 
 - name: Delete a file
-  ansible.builtin.file:
+  ansible.builtin.templates:
     path: "{{APP_PATH}}"
     state: absent
 
