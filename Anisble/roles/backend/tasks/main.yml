@@ -31,7 +31,7 @@
     name: nodejs
     state: present
 
-- name: Add the user 
+- name: Add the user  
   ansible.builtin.user:
     name: expense
     comment: App user
@@ -46,7 +46,7 @@
     path: "{{APP_PATH}}"
     state: directory
 
-- name: Dowloading file to remote server
+- name: Dowloading file and Extracting remote server
   ansible.builtin.unarchive:
     src: https://expense-web-app.s3.amazonaws.com/backend.zip 
     dest: "{{APP_PATH}}"              # Remote directory
