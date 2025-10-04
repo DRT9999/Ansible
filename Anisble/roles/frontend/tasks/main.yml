@@ -20,7 +20,7 @@
     state: present
 
 - name: Copy file
-  ansible.builtin.template:
+  ansible.builtin.copy:
     src: proxy.conf
     dest: /etc/nginx/default.d/expense.conf
 
