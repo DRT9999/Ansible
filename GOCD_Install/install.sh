@@ -26,7 +26,7 @@ stat $?
 
 cd /home/go
 
-wget https://download.gocd.org/binaries/25.3.0-20862/generic/go-server-24.3.0-19261.zip
+wget https://download.gocd.org/binaries/24.3.0-19261/generic/go-server-24.3.0-19261.zip
 stat $?
 
 
