@@ -55,4 +55,6 @@ stat $? "Enable GoCD Service"
 systemctl start gocd-server &>>/tmp/gocd-server.log
 stat $? "Start GoCD Service"
 
+systemctl status gocd-server
+
 echo -e "Open this URL -> http://$(curl -s ifconfig.me):8153"
