@@ -15,11 +15,11 @@ Description=GoCD Server
 
 [Service]
 Type=forking
-User=gocd
-ExecStart=/home/gocd/go-server-25.3.0/bin/go-server start sysd
-ExecStop=/home/gocd/go-server-25.3.8/bin/go-server stop sysd
+User=go
+ExecStart=/home/gocd/go-server/bin/go-server start sysd
+ExecStop=/home/gocd/go-server/bin/go-server stop sysd
 KillMode=control-group
-Environment SYSTEMO KILLMODE WARNING-true
+Environment=SYSTEMO_KILLMODE_WARNING=true
 
 [Install]
-WantedBy-multi-user.target
+WantedBy=multi-user.target
