@@ -20,13 +20,13 @@ fi
 useradd gocd  &>>/tmp/gocd-agent.log
 stat $? "Adding GoCD user"
 
-curl -L -o /tmp/go-server-24.3.0-19261.zip  https://download.gocd.org/binaries/24.3.0-19261/generic/go-server-24.3.0-19261.zip &>>/tmp/gocd-server.log
+curl -L -o /tmp/go-server-25.3.0-20862.zip  https://download.gocd.org/binaries/25.3.0-20862/generic/go-server-25.3.0-20862.zip &>>/tmp/gocd-server.log
 stat $? "Download GoCD zip File"
 
-unzip  -o /tmp/go-server-24.3.0-19261.zip -d /home/gocd/ &>>/tmp/gocd-server.log && rm -f /tmp/go-server-24.3.0-19261.zip
+unzip  -o /tmp/go-server-25.3.0-20862.zip -d /home/gocd/ &>>/tmp/gocd-server.log && rm -f /tmp/go-server-25.3.0-20862.zip
 stat $? "Unzipping GoCD zip file"
 
-chown -R gocd:gocd /home/gocd/go-server-24.3.0  &>>/tmp/gocd-server.log
+chown -R gocd:gocd /home/gocd/go-server-25.3.0  &>>/tmp/gocd-server.log
 
 echo '
 [Unit]
@@ -35,8 +35,8 @@ Description=GoCD Server
 [Service]
 Type=forking
 User=gocd
-ExecStart=/home/gocd/go-server-24.3.0/bin/go-server start sysd
-ExecStop=/home/gocd/go-server-24.3.0/bin/go-server stop sysd
+ExecStart=/home/gocd/go-server-25.3.0/bin/go-server start sysd
+ExecStop=/home/gocd/go-server-25.3.0/bin/go-server stop sysd
 KillMode=control-group
 Environment=SYSTEMD_KILLMODE_WARNING=true
 
@@ -55,7 +55,6 @@ stat $? "Enable GoCD Service"
 systemctl start gocd-server &>>/tmp/gocd-server.log
 stat $? "Start GoCD Service"
 
-systemctl status gocd-server
-stat $?
+netstat -tlnpu
 
 echo -e "Open this URL -> http://$(curl -s ifconfig.me):8153"
