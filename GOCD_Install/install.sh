@@ -9,7 +9,11 @@ stat() {
     fi 
 }
 
-useradd go
+if awk -F: '{print $1}' /etc/passwd | grep -q "^go$"; then
+    echo "User 'go' exists"
+else
+    useradd -m -s /bin/bash go
+fi
 stat $?
 
 java -version
