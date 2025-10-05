@@ -5,3 +5,7 @@ install on server with wget https://download.gocd.org/binaries/25.3.0-20862/gene
 after install open jdk 17 above
 
 check java --version
+
+check for free space available or not
+
+next step create user to install gocd server 
