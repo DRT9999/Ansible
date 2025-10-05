@@ -10,4 +10,4 @@ stat() {
 }
 
 useradd go
-stat$?
+stat $?
