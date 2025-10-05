@@ -10,14 +10,15 @@ check for free space available or not
 
 next step create user to install gocd server 
 
+
 [Unit]
 Description=GoCD Server
 
 [Service]
 Type=forking
 User=go
-ExecStart=/home/gocd/go-server/bin/go-server start sysd
-ExecStop=/home/gocd/go-server/bin/go-server stop sysd
+ExecStart=/home/go/gocd/go-server/bin/go-server start sysd
+ExecStop=/home/go/gocd/go-server/bin/go-server stop sysd
 KillMode=control-group
 Environment=SYSTEMO_KILLMODE_WARNING=true
 
