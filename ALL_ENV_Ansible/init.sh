@@ -1,0 +1,1 @@
+ansible-playbook -i inv-${env} -e ansible_user=ec2-user -e ansible_password=DevOps321 -e COMP=frontend -e env=dev expense.yml
