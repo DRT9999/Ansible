@@ -50,17 +50,23 @@
     name: mysql-server
     state: present
 
-- name: Inject schema using mysql CLI directly
-  ansible.builtin.shell: mysql -h mysql-{{env}}.exp.in -uroot -p{{pwd}} < /app/schema/backend.sql     #ExpenseApp@1
-  
-# - name: Inject schema
-#   community.mysql.mysql_db:
-#     state: import
-#     name: all
-#     target: /app/schema/backend.sql
-#     login_user: root
-#     login_password: ExpenseApp@1
-#     login_host: mysql.exp.in
+# - name: Inject schema using mysql CLI directly
+#   ansible.builtin.shell: mysql -h mysql-{{env}}.exp.in -u root -p{{pwd}} < /app/schema/backend.sql     #ExpenseApp@1
+- name: install pymsql
+  ansible.builtin.pip:
+    name:
+      - PyMySQl
+      - cryptography
+    executable: pip3.11
+    
+- name: Inject schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /app/schema/backend.sql
+    login_user: root
+    login_password: ExpenseApp@1
+    login_host: mysql-{{env}}.exp.in
 
 - name: Copy file
   ansible.builtin.template:
