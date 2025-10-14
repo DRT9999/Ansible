@@ -8,7 +8,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "ravi-sate"
+    bucket = "ravi-state"
     key = "dev/terraform.tfstate"
     region = "us-east-1"
     
