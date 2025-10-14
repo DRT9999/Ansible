@@ -2,6 +2,10 @@ resource "null_resource" "name" {
   
 }
 
+resource "null_resource" "enjoy" {
+  
+}
+
 provider "aws" {
   
 }
