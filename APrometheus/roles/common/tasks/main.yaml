@@ -1,0 +1,24 @@
+- name: Set Hostname to {{COMP}}-{{env}}
+  ansible.builtin.shell: set-hostname {{COMP}}-{{env}}
+
+- name: Configuring Node Exporter
+  ansible.builtin.include_role:      # Through this we can all a specific task from a role
+    name: prometheus                     # Name of the role to be called 
+    tasks_from: node-expoter             # Name of the task in the above mentioned role 
+  
+# - name: Configuring Nginx Exporter      # Should only run for frontend as nginx is running on frontend
+#   ansible.builtin.include_role:      
+#     name: prometheus                    
+#     tasks_from: nginx-exporter     
+#   when: nginx_exporter
+  
+# - name: Configuring Grok Exporter      # Should only run for frontend as nginx is running on frontend
+#   ansible.builtin.include_role:      
+#     name: prometheus                    
+#     tasks_from: grok-exporter     
+#   when: grok_exporter
+
+# - name: Installing and configuring filebeat      # Should only run for frontend and backend
+#   ansible.builtin.include_role:      
+#     name: filebeat                    
+#   when: install_filebeat
