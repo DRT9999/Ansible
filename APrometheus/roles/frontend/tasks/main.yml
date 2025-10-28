@@ -1,0 +1,47 @@
+#dnf install nginx -y  
+#cp proxy.conf /etc/nginx/default.d/expense.conf 
+#systemctl enable nginx    
+#rm -rf /usr/share/nginx/html/*   
+#curl -o /tmp/frontend.zip https://expense-web-app.s3.amazonaws.com/frontend.zip
+#cd /usr/share/nginx/html 
+#unzip /tmp/frontend.zip
+#pwd
+#ls -ltr
+
+#ystemctl restart nginx 
+
+#echo "** Frontend Installation Is Completed **"
+- name: Set Hostname to {{COMP}}
+  ansible.builtin.shell: set-hostname {{COMP}}
+
+- name: Install a package
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+- name: Copy file
+  ansible.builtin.copy:
+    src: proxy.conf
+    dest: /etc/nginx/default.d/expense.conf
+
+- name: Delete a file
+  ansible.builtin.file:
+    path: "{{APP_PATH}}"
+    state: absent
+
+- name: Create a directory
+  ansible.builtin.file:
+    path: "{{APP_PATH}}"
+    state: directory
+
+- name: Dowloading file to remote server
+  ansible.builtin.unarchive:
+    src: https://expense-web-app.s3.amazonaws.com/frontend.zip      # Local path (control node)
+    dest: "{{APP_PATH}}"              # Remote directory
+    remote_src: yes                 # File is copied to remote before extracting
+
+- name: ReStart nginx service
+  ansible.builtin.systemd:
+    name: nginx
+    state: restarted
+    enabled: yes   # Enable to start at boot
